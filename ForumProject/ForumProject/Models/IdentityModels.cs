@@ -26,6 +26,11 @@ namespace ForumProject.Models
         {
         }
 
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<DiscussionThread> DiscussionThreads { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
