@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.comment {
+    width: 90%;
+    position: relative;
+}
+
+.footerComment {
+    position: absolute;
+    bottom: 0;
+}

@@ -1,0 +1,8 @@
+﻿@model ForumProject.Models.Comment
+
+<div class="comment">
+    <p>@Model.Text</p>
+    <div class="footerComment">
+        Posted on @Model.Date by @Model.User.Nickname
+    </div>
+</div>
