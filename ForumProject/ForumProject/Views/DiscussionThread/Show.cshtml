@@ -1,22 +1,36 @@
 ﻿@model ForumProject.Models.DiscussionThread
 
 @{
+    /**/
+
     ViewBag.Title = "Show";
 }
 
 <h2>Comentariile din firul de discutie @ViewBag.CurrentDiscussionThread.Name</h2>
-
-@foreach (ForumProject.Models.Comment comment in ViewBag.Comments)
+@if (ViewBag.Comments != null)
 {
-    @Html.Partial("CommentInfo", comment)
-    if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
+    foreach (ForumProject.Models.Comment comment in ViewBag.Comments)
     {
-        <span class="actionLink">@Html.ActionLink(linkText: "Editeaza comentariul", actionName: "Edit", controllerName: "Comment", routeValues: new { id = comment.Id }, htmlAttributes: null)</span>
-        <span class="actionLink">@Html.ActionLink(linkText: "Sterge comentariul", actionName: "Delete", controllerName: "Comment", routeValues: new { id = comment.Id }, htmlAttributes: null)</span>
+        @Html.Partial("CommentInfo", comment)
+        if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
+        {
+            <span class="actionLink">@Html.ActionLink(linkText: "Editeaza comentariul", actionName: "Edit", controllerName: "Comment", routeValues: new { id = comment.Id }, htmlAttributes: null)</span>
+            using (Html.BeginForm(actionName: "Delete", controllerName: "Comment", routeValues: new { id = comment.Id }))
+            {
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-success" type="submit">Sterge comentariul</button>
+            }
+        }
     }
-}
 
+}
+else
+{
+    <h3>Fii primul care comenteaza</h3>
+}
+<br />
+<br />
 @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
 {
-    <span class="actionLink">@Html.ActionLink(linkText: "Adauga comentariu", actionName: "New", controllerName: "Comment", routeValues: new { discussionThreadId = Model.Id}, htmlAttributes: null)</span>
+    <span class="actionLink">@Html.ActionLink(linkText: "Adauga comentariu", actionName: "New", controllerName: "Comment", routeValues: new { discussionThreadId = Model.Id }, htmlAttributes: null)</span>
 }

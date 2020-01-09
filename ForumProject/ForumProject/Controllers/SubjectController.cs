@@ -76,7 +76,6 @@ namespace ForumProject.Controllers
         [Authorize(Roles = "Admin, Moderator")]
         public ActionResult New(int categoryId, Subject subject)
         {
-            subject.Categories = GetAllCategories();
             try
             {
                 if (ModelState.IsValid)

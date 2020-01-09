@@ -8,16 +8,21 @@
 @foreach (ForumProject.Models.DiscussionThread discussionThread in ViewBag.DiscussionThreads)
 {
     @Html.Partial("DiscussionThreadInfo", discussionThread)
-    <span class="actionLink">@Html.ActionLink(linkText: "Afiseaza firul de discutie", actionName: "Show", controllerName: "DiscussionThread")</span>
+    <span class="actionLink">@Html.ActionLink(linkText: "Afiseaza firul de discutie", actionName: "Show", controllerName: "DiscussionThread", routeValues: new { discussionThreadId = discussionThread.Id }, htmlAttributes: null)</span>
     if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
     {
         <span class="actionLink">@Html.ActionLink(linkText: "Editeaza firul de discutie", actionName: "Edit", controllerName: "DiscussionThread", routeValues: new { id = discussionThread.Id }, htmlAttributes: null)</span>
-        <span class="actionLink">@Html.ActionLink(linkText: "Sterge firul de discutie", actionName: "Edit", controllerName: "DiscussionThread", routeValues: new { id = discussionThread.Id }, htmlAttributes: null)</span>
+        using (Html.BeginForm(actionName: "Delete", controllerName: "DiscussionThread", routeValues: new { id = discussionThread.Id }))
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-success" type="submit">Sterge firul de discutie</button>
+        }
     }
     <br />
 }
-
+<br />
+<br />
 @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
 {
-    <span class="actionLink">@Html.ActionLink(linkText: "Adauga fir de discutie", actionName: "New", controllerName: "DiscussionThread", routeValues: new { subjectId = ViewBag.CurrentSubject.Id}, htmlAttributes: null)</span>
+    <span class="actionLink">@Html.ActionLink(linkText: "Adauga fir de discutie", actionName: "New", controllerName: "DiscussionThread", routeValues: new { subjectId = ViewBag.CurrentSubject.Id }, htmlAttributes: null)</span>
 }

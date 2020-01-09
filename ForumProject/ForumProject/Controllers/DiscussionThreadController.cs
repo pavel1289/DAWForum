@@ -19,21 +19,15 @@ namespace ForumProject.Controllers
                                     orderby thread.Name
                                     where thread.SubjectId == id
                                     select thread;
-            foreach(var thread in discussionThreads)
-            {
-                var userId = thread.UserId;
-                thread.User = db.Users.Find(userId);
-            }
+            fillUsers(discussionThreads);
             ViewBag.DiscussionThreads = discussionThreads;
             ViewBag.CurrentSubject = db.Subjects.Find(id);
             return View();
         }
 
-        public ActionResult Show(int id)
+        public ActionResult Show(int discussionThreadId)
         {
-            DiscussionThread discussionThread = db.DiscussionThreads.Find(id);
-            ViewBag.CurrentDiscussionThread = discussionThread;
-            return View(discussionThread);
+            return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Comment", action = "Index", id = discussionThreadId }));
         }
 
         [Authorize(Roles = "Admin, Moderator, User")]
@@ -157,6 +151,19 @@ namespace ForumProject.Controllers
             }
 
             return selectList;
+        }
+
+        [NonAction]
+        private void fillUsers(IQueryable<DiscussionThread> discussionThreads)
+        {
+            var users = from user in db.Users
+                        select user;
+            var listUsers = users.ToList();
+            foreach (var thread in discussionThreads)
+            {
+                var userId = thread.UserId;
+                thread.User = listUsers.Find(x => x.Id.Equals(userId));
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
 
 <h2>New</h2>
 
-@using (Html.BeginForm(actionName: "New", controllerName: "Subject"))
+@using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
 {
     @Html.HiddenFor(x => x.UserId)
     @Html.HiddenFor(x => x.Date)

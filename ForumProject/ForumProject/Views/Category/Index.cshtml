@@ -12,10 +12,16 @@
     if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
         <span class="actionLink">@Html.ActionLink(linkText: "Editeaza categoria", actionName: "Edit", controllerName: "Category", routeValues: new { id = category.Id }, htmlAttributes: null)</span>
-        <span class="actionLink">@Html.ActionLink(linkText: "Sterge categoria", actionName: "Delete", controllerName: "Category", routeValues: new { id = category.Id }, htmlAttributes: null)</span>
+        using (Html.BeginForm(actionName: "Delete", controllerName: "Category", routeValues: new { id = category.Id }))
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-success" type="submit">Sterge categoria</button>
+        }
     }
     <br />
 }
+<br/>
+<br/>
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
     <span class="actionLink">@Html.ActionLink(linkText: "Adauga o categorie noua", actionName: "New", controllerName: "Category")</span>

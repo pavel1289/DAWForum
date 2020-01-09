@@ -12,12 +12,17 @@
     if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
     {
         <span class="actionLink">@Html.ActionLink(linkText: "Editeaza subiectul", actionName: "Edit", controllerName: "Subject", routeValues: new { id = subject.Id }, htmlAttributes: null)</span>
-        <span class="actionLink">@Html.ActionLink(linkText: "Sterge subiectul", actionName: "Delete", controllerName: "Subject", routeValues: new { id = subject.Id }, htmlAttributes: null)</span>
+        using (Html.BeginForm(actionName: "Delete", controllerName: "Subject", routeValues: new { id = subject.Id }))
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-success" type="submit">Sterge subiectul</button>
+        }
     }
     <br />
 }
-
+<br />
+<br />
 @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
 {
-    <span class="actionLink">@Html.ActionLink(linkText: "Adauga un subiect", actionName: "New", controllerName: "Subject", routeValues: new { categoryId = ViewBag.CurrentCategory.Id}, htmlAttributes: null)</span>
+    <span class="actionLink">@Html.ActionLink(linkText: "Adauga un subiect", actionName: "New", controllerName: "Subject", routeValues: new { categoryId = ViewBag.CurrentCategory.Id }, htmlAttributes: null)</span>
 }

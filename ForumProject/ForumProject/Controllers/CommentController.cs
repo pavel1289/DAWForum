@@ -19,11 +19,7 @@ namespace ForumProject.Controllers
                            orderby comment.Date
                            where comment.DiscussionThreadId.Equals(id)
                            select comment;
-            foreach (var comment in comments)
-            {
-                var userId = comment.UserId;
-                comment.User = db.Users.Find(userId);
-            }
+            fillUsers(comments);
             ViewBag.Comments = comments;
             ViewBag.CurrentDiscussionThread = db.DiscussionThreads.Find(id);
             return View();
@@ -132,6 +128,19 @@ namespace ForumProject.Controllers
             {
                 TempData["message"] = "Credeam ca m-am facut inteles, nu umbla daca nu e comentariul tau...";
                 return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Comment", action = "Index", id = comment.DiscussionThreadId}));
+            }
+        }
+
+        [NonAction]
+        private void fillUsers(IQueryable<Comment> comments)
+        {
+            var users = from user in db.Users
+                        select user;
+            var listUsers = users.ToList();
+            foreach (var comment in comments)
+            {
+                var userId = comment.UserId;
+                comment.User = listUsers.Find(x => x.Id.Equals(userId));
             }
         }
     }
