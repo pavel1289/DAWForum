@@ -14,10 +14,17 @@
     @Html.Label("Name", "Numele firului de discutie")
     @Html.TextBox("Name", null, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
-    <br/>
+    <br />
     @Html.Label("Description", "O mica descriere pentru firul de discutie")
     @Html.TextArea("Description", null, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger" })
+    <br />
+    @Html.Label("Subject", "Selecteaza subiectul:")
+    @Html.DropDownListFor(x => x.SubjectId,
+                    new SelectList(Model.Subjects, "Value", "Text"),
+                    "Selecteaza categoria",
+                    new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.SubjectId, "", new { @class = "text-danger" })
     <br/>
     <button class="btn btn-success" type="submit">Editeaza firul de discutie</button>
 }

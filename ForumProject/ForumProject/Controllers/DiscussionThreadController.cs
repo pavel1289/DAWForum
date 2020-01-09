@@ -34,6 +34,7 @@ namespace ForumProject.Controllers
         public ActionResult Edit(int id)
         {
             DiscussionThread discussionThread = db.DiscussionThreads.Find(id);
+            discussionThread.Subjects = GetAllSubjects();
             ViewBag.DiscussionThread = discussionThread;
             if (discussionThread.UserId.Equals(User.Identity.GetUserId()) || User.IsInRole("Admin, Moderator"))
             {
