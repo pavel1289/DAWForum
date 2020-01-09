@@ -33,7 +33,7 @@ namespace ForumProject
 
                 // se adauga utilizatorul administrator                 
                 var user = new ApplicationUser();
-                user.UserName = "admin123";
+                user.UserName = "admin@admin.com";
                 user.Email = "admin@admin.com";
 
                 var adminCreated = UserManager.Create(user, "Admin123!");

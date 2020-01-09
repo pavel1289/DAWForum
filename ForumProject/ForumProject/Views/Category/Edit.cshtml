@@ -1,0 +1,19 @@
+﻿@model ForumProject.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Category"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.Label("Name", "Numele categoriei:")
+    @Html.EditorFor(x => x.Name)
+    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger"})
+    <br/>
+    <button class="btn btn-success" type="submit">Modifica categoria</button>
+}
+

@@ -23,12 +23,38 @@ textarea {
     max-width: 280px;
 }
 
-.comment {
-    width: 90%;
-    position: relative;
-}
-
 .footerComment {
     position: absolute;
     bottom: 0;
+}
+
+.actionLink {
+    font-family: Papyrus;
+    color: darkblue;
+    padding: 4em 2em 5em 2em;
+}
+
+.category {
+    font-family: Papyrus;
+    font-size: 4em;
+    font-style: italic;
+    padding: 0.3em 5em 0.3em 1em;
+}
+
+.subject {
+    font-family: Papyrus;
+    font-size: 3em;
+    padding: 0.2em 4em 0.2em 1em;
+}
+
+.discussionThread {
+    font-family: Papyrus;
+    font-size: 2em;
+}
+
+.comment {
+    font-family: Papyrus;
+    font-size: 1em;
+    width: 90%;
+    position: relative;
 }

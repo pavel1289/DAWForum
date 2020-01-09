@@ -1,0 +1,23 @@
+﻿@model ForumProject.Models.Category
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+@foreach (ForumProject.Models.Subject subject in ViewBag.Subjects)
+{
+    @Html.Partial("SubjectInfo", subject)
+    <span class="actionLink">@Html.ActionLink(linkText: "Afiseaza subiect", actionName: "Show", controllerName: "Subject", routeValues: new { subjectIdd = subject.Id}, htmlAttributes: null)</span>
+    if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
+    {
+        <span class="actionLink">@Html.ActionLink(linkText: "Modifica subiectul", actionName: "Edit", controllerName: "Subject", routeValues: new { id = subject.Id }, htmlAttributes: null)</span>
+        <span class="actionLink">@Html.ActionLink(linkText: "Sterge subiectul", actionName: "Delete", controllerName: "Subject", routeValues: new { id = subject.Id }, htmlAttributes: null)</span>
+    }
+}
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
+{
+        <span class="actionLink">@Html.ActionLink(linkText: "Adauga subiect", actionName: "New", controllerName: "Subject", routeValues: new { categoryId = Model.Id}, htmlAttributes: null)</span>
+}

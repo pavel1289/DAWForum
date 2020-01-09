@@ -177,6 +177,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -309,7 +310,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -354,13 +357,31 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\CommentInfo.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Shared\CategoryInfo.cshtml" />
+    <Content Include="Views\Category\New.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Shared\SubjectInfo.cshtml" />
+    <Content Include="Views\Shared\DiscussionThreadInfo.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\DiscussionThread\Index.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Category\Show.cshtml" />
+    <Content Include="Views\Subject\Show.cshtml" />
+    <Content Include="Views\Subject\Edit.cshtml" />
+    <Content Include="Views\Subject\New.cshtml" />
+    <Content Include="Views\DiscussionThread\New.cshtml" />
+    <Content Include="Views\DiscussionThread\Show.cshtml" />
+    <Content Include="Views\DiscussionThread\Edit.cshtml" />
+    <Content Include="Views\Comment\Show.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Comment\New.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Show.cshtml" />
+    <Content Include="Views\Shared\UserInfo.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Category\" />
-    <Folder Include="Views\Comment\" />
-    <Folder Include="Views\DiscussionThread\" />
-    <Folder Include="Views\Subject\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />

@@ -1,0 +1,23 @@
+﻿@model ForumProject.Models.Subject
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Firele de discutie din subiectul @ViewBag.CurrentSubject.Name</h2>
+
+@foreach (ForumProject.Models.DiscussionThread discussionThread in ViewBag.DiscussionThreads)
+{
+    @Html.Partial("DiscussionThreadInfo", discussionThread)
+    <span class="actionLink">@Html.ActionLink(linkText: "Afiseaza firul de discutie", actionName: "Show", controllerName: "DiscussionThread", routeValues: new { id = discussionThread.Id }, htmlAttributes: null)</span>
+    if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
+    {
+        <span class="actionLink">@Html.ActionLink(linkText: "Editeaza firul de discutie", actionName: "Edit", controllerName: "DiscussionThread", routeValues: new { id = discussionThread.Id }, htmlAttributes: null)</span>
+        <span class="actionLink">@Html.ActionLink(linkText: "Sterge firul de discutie", actionName: "Delete", controllerName: "DiscussionThread", routeValues: new { id = discussionThread.Id }, htmlAttributes: null)</span>
+    }
+}
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
+{
+    <span class="actionLink">@Html.ActionLink(linkText: "Adauga fir de discutie", actionName: "New", controllerName: "DiscussionThread", routeValues: new { subjectId = Model.Id}, htmlAttributes: null)</span>
+}

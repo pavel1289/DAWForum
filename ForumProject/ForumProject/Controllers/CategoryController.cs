@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ForumProject.Controllers
 {
@@ -20,11 +21,9 @@ namespace ForumProject.Controllers
             return View();
         }
 
-        public ActionResult Show(string id)
+        public ActionResult Show(int categoryId)
         {
-            Category category = db.Categories.Find(id);
-
-            return View(category);
+            return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Subject", action = "Index", id = categoryId }));
         }
 
         [Authorize(Roles = "Admin")]
@@ -58,7 +57,7 @@ namespace ForumProject.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
             return View(category);
@@ -66,7 +65,7 @@ namespace ForumProject.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(string id, Category requestCategory)
+        public ActionResult Edit(int id, Category requestCategory)
         {
             try
             {
@@ -93,7 +92,7 @@ namespace ForumProject.Controllers
 
         [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);

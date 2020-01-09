@@ -1,0 +1,23 @@
+﻿@model ForumProject.Models.DiscussionThread
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "DiscussionThread"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.HiddenFor(x => x.Date)
+    @Html.Label("Name", "Numele firului de discutie")
+    @Html.TextBox("Name", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+    <br/>
+    @Html.Label("Description", "O mica descriere pentru firul de discutie")
+    @Html.TextArea("Description", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger" })
+    <br/>
+    <button class="btn btn-success" type="submit">Editeaza firul de discutie</button>
+}

@@ -1,0 +1,24 @@
+﻿@model ForumProject.Models.Subject
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Subject"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.Label("Name", "Numele subiectului:")
+    @Html.TextBox("Name", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger"})
+    <br/>
+    @Html.Label("Category", "Selecteaza categoria:")
+    @Html.DropDownListFor(x => x.CategoryId,
+                    new SelectList(Model.Categories, "Value", "Text"),
+                    "Selecteaza categoria",
+                    new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.CategoryId, "", new { @class = "text-danger"})
+    <br/>
+    <button class="btn btn-success" type="submit">Modifica subiectul</button>
+}

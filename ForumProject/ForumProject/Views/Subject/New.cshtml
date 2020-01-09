@@ -1,0 +1,17 @@
+﻿@model ForumProject.Models.Subject
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Subject", method: FormMethod.Post))
+{
+    @Html.Label("Name", "Numele subiectului")
+    @Html.TextBox("Name", null, new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger"})
+    @Html.HiddenFor(x => x.CategoryId)
+    <br/>
+    <button class="btn btn-success" type="submit">Adauga subiect</button>
+}

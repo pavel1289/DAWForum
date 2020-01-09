@@ -1,0 +1,19 @@
+﻿@model ForumProject.Models.Comment
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Subject"))
+{
+    @Html.HiddenFor(x => x.UserId)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.DiscussionThreadId)
+    @Html.Label("Text", "Introdu comentariul")
+    @Html.TextArea("Text", null, new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.Text, "", new { @class = "text-danger"})
+    <br />
+    <button class="btn btn-success" type="submit">Adauga comentariu</button>
+}

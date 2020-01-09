@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index - Category</h2>
+
+@foreach (ForumProject.Models.Category category in ViewBag.Categories)
+{
+    @Html.Partial("CategoryInfo", category)
+    <span class="actionLink">@Html.ActionLink(linkText: "Afisare categorie", actionName: "Show", controllerName: "Category", routeValues: new { categoryId = category.Id }, htmlAttributes: null)</span>
+    if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <span class="actionLink">@Html.ActionLink(linkText: "Editeaza categoria", actionName: "Edit", controllerName: "Category", routeValues: new { id = category.Id }, htmlAttributes: null)</span>
+        <span class="actionLink">@Html.ActionLink(linkText: "Sterge categoria", actionName: "Delete", controllerName: "Category", routeValues: new { id = category.Id }, htmlAttributes: null)</span>
+    }
+    <br />
+}
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <span class="actionLink">@Html.ActionLink(linkText: "Adauga o categorie noua", actionName: "New", controllerName: "Category")</span>
+}

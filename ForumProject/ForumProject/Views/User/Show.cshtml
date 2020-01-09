@@ -1,0 +1,22 @@
+﻿@model ForumProject.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<div class="panel panel-default">
+    @Html.Partial("UserInfo", Model)
+    <div class="panel-footer">
+        <a class="btn btn-success" href="/User/Edit/@Model.Id">Modifica utilizator</a>
+        <br />
+        @if (Model.Id != ViewBag.utilizatorCurent)
+        {
+            <form method="post" action="/User/Delete/@Model.Id">
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-sm btn-success" type="submit">Sterge utilizator</button>
+            </form>
+        }
+        <br />
+    </div>
+</div>
+

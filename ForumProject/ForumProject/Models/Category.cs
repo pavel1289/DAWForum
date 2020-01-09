@@ -9,10 +9,10 @@ namespace ForumProject.Models
     public class Category
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "Un nume pentru categorie este necesar, ar trebui sa stii asta, dat fiind ca esti administrator.")]
+        [StringLength(20, ErrorMessage = "Sa fim seriosi, un nume de categorie nu depaseste 20 caractere...")]
         public string Name { get; set; }
-
         public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

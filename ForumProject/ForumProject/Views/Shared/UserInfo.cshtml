@@ -1,0 +1,9 @@
+﻿
+@model ForumProject.Models.ApplicationUser
+
+<p>@Model.UserName</p>
+<p>@Model.Email</p>
+@if (!Model.PhoneNumber.IsEmpty())
+{
+    <p>@Model.PhoneNumber</p>
+}

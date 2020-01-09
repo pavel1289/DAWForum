@@ -1,0 +1,22 @@
+﻿@model ForumProject.Models.DiscussionThread
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Comentariile din firul de discutie @ViewBag.CurrentDiscussionThread.Name</h2>
+
+@foreach (ForumProject.Models.Comment comment in ViewBag.Comments)
+{
+    @Html.Partial("CommentInfo", comment)
+    if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
+    {
+        <span class="actionLink">@Html.ActionLink(linkText: "Editeaza comentariul", actionName: "Edit", controllerName: "Comment", routeValues: new { id = comment.Id }, htmlAttributes: null)</span>
+        <span class="actionLink">@Html.ActionLink(linkText: "Sterge comentariul", actionName: "Delete", controllerName: "Comment", routeValues: new { id = comment.Id }, htmlAttributes: null)</span>
+    }
+}
+
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("User")))
+{
+    <span class="actionLink">@Html.ActionLink(linkText: "Adauga comentariu", actionName: "New", controllerName: "Comment", routeValues: new { discussionThreadId = Model.Id}, htmlAttributes: null)</span>
+}

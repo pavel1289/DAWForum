@@ -1,0 +1,24 @@
+﻿@model ForumProject.Models.DiscussionThread
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "DiscussionThread"))
+{
+
+    @Html.HiddenFor(x => x.UserId)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.SubjectId)
+    @Html.Label("Name", "Numele firului de discutie")
+    @Html.TextBox("Name", null, new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger"})
+    <br/>
+    @Html.Label("Description", "O mica descriere pentru firul de discutie")
+    @Html.TextArea("Description", null, new { @class = "form-control"})
+    @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger"})
+    <br/>
+    <button class="btn btn-success" type="submit">Creaza firul de discutie</button>
+}
